@@ -1,0 +1,36 @@
+{
+  "name": "rabbitmq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tutorial-2": "npm-run-all tutorial-2-producer -p tutorial-2-consumer-1 tutorial-2-consumer-2",
+    "tutorial-2-producer": "echo 'A producer that will send 12 messages to rabbitmq' && node ./src/tutorial-2/producer.js 12",
+    "tutorial-2-consumer-1": "echo 'Consumer number 1' && node ./src/tutorial-2/consumer.js 1",
+    "tutorial-2-consumer-2": "echo 'Consumer number 2' && node ./src/tutorial-2/consumer.js 2",
+
+    "tutorial-3": "run-p tutorial-3-subscriber-1 tutorial-3-subscriber-2 tutorial-3-publisher",
+    "tutorial-3-publisher": "echo 'A publisher that will send 10 messages to rabbitmq' && node ./src/tutorial-3/broadcast_publisher.js 10",
+    "tutorial-3-subscriber-1": "echo 'Subscriber number 1' && node ./src/tutorial-3/broadcast_subscriber.js 1",
+    "tutorial-3-subscriber-2": "echo 'Subscriber number 2' && node ./src/tutorial-3/broadcast_subscriber.js 2",
+    
+    "tutorial-4": "run-p tutorial-4-subscriber-1 tutorial-4-subscriber-2 tutorial-4-publisher",
+    "tutorial-4-publisher": "echo 'A publisher that will send 1 info, 2 error and 3 warning messages to rabbitmq' && node ./src/tutorial-4/broadcast_publisher.js 1 2 3",
+    "tutorial-4-subscriber-1": "echo 'Subscriber number 1 that only listens to routing key __error__' && node ./src/tutorial-4/broadcast_subscriber.js 1 error",
+    "tutorial-4-subscriber-2": "echo 'Subscriber number 1 that only listens to routing keys __info__ __error__ __warning__' && node ./src/tutorial-4/broadcast_subscriber.js 2 info error warning",
+
+    "tutorial-5": "run-p tutorial-5-subscriber-1 tutorial-5-subscriber-2 tutorial-5-publisher",
+    "tutorial-5-publisher": "echo 'A publisher that will send some topics' && node ./src/tutorial-5/broadcast_publisher.js",
+    "tutorial-5-subscriber-1": "echo 'Subscriber number 1 that listens to all topics: #' && node ./src/tutorial-5/broadcast_subscriber.js 1 #",
+    "tutorial-5-subscriber-2": "echo 'Subscriber number 1 that listens to topics: user.* *.log' && node ./src/tutorial-5/broadcast_subscriber.js 2 user.* *.log"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.8.0"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
